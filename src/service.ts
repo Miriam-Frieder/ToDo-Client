@@ -13,7 +13,7 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-export function saveAccessToken(authResult) {
+export function saveAccessToken(authResult: {token: string}) {
   localStorage.setItem("token", authResult.token);
   setAuthorizationBearer();
 }
@@ -29,25 +29,25 @@ export const getTasks = async () => {
   return data;
 };
 
-export const addTask = async (name) => {
+export const addTask = async (name:string) => {
   return await axios.post("/items", { name, isComplete: false });
 };
 
-export const setCompleted = async (id, name, isComplete) => {
+export const setCompleted = async (id:number, name:string, isComplete:boolean) => {
   return await axios.put(`/items/${id}`, { name, isComplete });
 };
 
-export const deleteTask = async (id) => {
+export const deleteTask = async (id:number) => {
   return await axios.delete(`/items/${id}`);
 };
 
-export const register = async (name, password) => {
+export const register = async (name:String, password:String) => {
 
     return await axios.post('/register', { name, password });
    
 };
 
-export const login = async (name, password) => {
+export const login = async (name:String, password:String) => {
   const response = await axios.post('/login', { name, password });
   return response;
 };

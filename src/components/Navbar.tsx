@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar } from "@mui/material";
+import {  Box, Button, Toolbar } from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LoginIcon from '@mui/icons-material/Login';
 import { Link as RouterLink } from "react-router-dom"; // Corrected to "react-router-dom"

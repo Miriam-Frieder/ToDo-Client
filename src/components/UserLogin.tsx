@@ -1,7 +1,7 @@
 import { FormEvent, useState, useEffect } from "react";
 import { User } from "./Types";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
-import { register, login, saveAccessToken } from "../service.js";
+import { register, login, saveAccessToken } from "../service";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const emptyUser:User={
@@ -30,9 +30,9 @@ const Login = ({ isRegister }: { isRegister: boolean }) => {
     try {
       let response;
       if (isRegister) {
-        response = await register(userData.username, userData.password);
+        response = await register(userData.username??"", userData.password??"");
       } else {
-        response = await login(userData.username, userData.password);
+        response = await login(userData.username??"", userData.password??"");
       }
 
       if (response && response.data?.token) {

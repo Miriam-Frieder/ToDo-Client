@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import {addTask,deleteTask,getTasks,setCompleted}  from '../service.js';
+import  { FormEvent, useEffect, useState } from 'react';
+import {addTask,deleteTask,getTasks,setCompleted}  from '../service';
+import { Todo } from './Types';
 
 function Todos() {
   const [newTodo, setNewTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   async function getTodos() {
     const todos = await getTasks();
     setTodos(todos);
   }
 
-  async function createTodo(e) {
+  async function createTodo(e: FormEvent) {
     e.preventDefault();
     await addTask(newTodo);
     setNewTodo("");//clear input
     await getTodos();//refresh tasks list (in order to see the new one)
   }
 
-  async function updateCompleted(todo, isComplete) {
+  async function updateCompleted(todo:Todo, isComplete:boolean) {
     await setCompleted(todo.id, todo.name, isComplete);
     await getTodos();//refresh tasks list (in order to see the updated one)
   }
 
-  async function deleteTodo(id) {
+  async function deleteTodo(id:number) {
     await deleteTask(id);
     await getTodos();//refresh tasks list
   }

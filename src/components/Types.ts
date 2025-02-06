@@ -4,5 +4,10 @@ export type User={
     password?: String,
   
 }
+export type Todo={
+    id:number,
+    name:string,
+    isComplete: boolean
+}
 
 
