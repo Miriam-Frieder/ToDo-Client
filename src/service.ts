@@ -10,10 +10,16 @@ axios.interceptors.response.use(
       localStorage.removeItem("token");
       return (window.location.href = "/login");
     }
+    else if (error.response.status === 404) {
+      alert('User not found')
+    }
+    else {
+      alert(error.response.status + " - " + error.response.data.message);
+    }
     return Promise.reject(error);
   }
 );
-export function saveAccessToken(authResult: {token: string}) {
+export function saveAccessToken(authResult: { token: string }) {
   localStorage.setItem("token", authResult.token);
   setAuthorizationBearer();
 }
@@ -29,25 +35,25 @@ export const getTasks = async () => {
   return data;
 };
 
-export const addTask = async (name:string) => {
+export const addTask = async (name: string) => {
   return await axios.post("/items", { name, isComplete: false });
 };
 
-export const setCompleted = async (id:number, name:string, isComplete:boolean) => {
+export const setCompleted = async (id: number, name: string, isComplete: boolean) => {
   return await axios.put(`/items/${id}`, { name, isComplete });
 };
 
-export const deleteTask = async (id:number) => {
+export const deleteTask = async (id: number) => {
   return await axios.delete(`/items/${id}`);
 };
 
-export const register = async (name:String, password:String) => {
+export const register = async (name: String, password: String) => {
 
-    return await axios.post('/register', { name, password });
-   
+  return await axios.post('/register', { name, password });
+
 };
 
-export const login = async (name:String, password:String) => {
+export const login = async (name: String, password: String) => {
   const response = await axios.post('/login', { name, password });
   return response;
 };

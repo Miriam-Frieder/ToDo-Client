@@ -31,6 +31,7 @@ const Login = ({ isRegister }: { isRegister: boolean }) => {
       let response;
       if (isRegister) {
         response = await register(userData.username??"", userData.password??"");
+        navigate("/login", { replace: true });
       } else {
         response = await login(userData.username??"", userData.password??"");
       }
@@ -41,6 +42,7 @@ const Login = ({ isRegister }: { isRegister: boolean }) => {
         setUserData(emptyUser);
         navigate("/todos", { replace: true });
       }
+
     } catch (e) {
       console.error("Error:", e);
     }
