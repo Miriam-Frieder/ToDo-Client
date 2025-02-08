@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = "http://localhost:5001/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+
+axios.defaults.baseURL = `${API_BASE_URL}/api`;
 setAuthorizationBearer();
 
 axios.interceptors.response.use(
